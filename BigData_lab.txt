@@ -1,0 +1,55 @@
+use pragya// this will create as well as use the database
+db.createCollection("test")// this will create a table
+show dbs//to show all the databases
+show collections//to show all the tables
+//insert,delete,update
+//insert can be done in two ways ,insertOne,insertMany
+db.test.insertOne({Name:"Ayushi",Age:"20",RegNo:"45782"})
+db.test.insertMany([{Name:"Pragya",Age:"70"},{Name:"Ayush",Age:"20",RegNo:"4578",Brain:"100%"},{Name:"Nazia",Age:"20",RegNo:"452",Brain:"0%"}])
+db.test.updateOne({Name:"Ayushi"},{$set:{Age:"21"}})
+db.test.updateOne({Name:"Ayushi"},{$set:{Name:"Abc"}})
+db.test.find()//for showing the tuples of the table same as select* from table in SQL
+db.test.updateMany({Age:"20"},{$set:{Brain:"100%"}});
+db.test.find().pretty()// to show the content in formtted manner
+db.test.findOne({Name:"Ayushi"})
+db.test.find()
+db.test.findOne({Name:"Pragya"})
+db.test.findOne({Age:"20"})//to display single record with the the given specification
+db.test.find({Age:"20"})//to display multiple record with the the given specification
+db.test.find().limit(4)//this will limit the first two record of the table from the top
+db.test.find().skip(1)//this will display all the record remaining the first one
+db.test.find().limit(3).skip(1)//to display the second & third record
+db.test.find().sort({Name:1})//1-->ascending order ,-1-->descending order
+
+for reference of sort method attribute in detail
+
+//      sort ( { age : -1, posts: 1 } )//age & name are the attributes of the table
+
+//USING the AND command for checking the specification in find() method
+db.test.find({$and:[{Age:"20"},{Name:"Nazia"}]})
+db.test.findOne({$and:[{Age:"20"},{Name:"Nazia"}]})
+//Both will give the same output because we have only one record  match to the given specifictaion in the table 
+//But find()--> will give all the record matching with the soecufications and findOne()--> will give the first record
+
+//USING the OR command for checking the specification in find() method
+db.test.find({$or:[{Age:"20"},{Name:"Nazia"}]})
+db.test.find({$or:[{Age:"20"},{Name:"Abc"}]})
+
+//USING the OR and AND command for checking the specification in find() method
+db.test.find({$or:[{Age:"20"},{$and:[{Name:"Abc"},{Age:"21"}]}]})//display x+y record
+
+db.test.updateOne({Brain:"100%"},{$set:{Brain:"70%"}})
+db.test.find()
+
+//USING the NOR command for checking the specification in find() method
+db.test.find({$nor:[{Brain:"100%"},{Age:"21"}]})
+
+//USING the NOT command for checking the specification in find() method
+db.test.find({Age:{$not:{$gt:"19"}}})
+
+db.test.insertOne({Name:"Ayushi",Age:"18",RegNo:"45782"})
+db.test.find({Age:{$not:{$gt:"19"}}})
+
+db.test.createIndex({"Abc":1})
+// db.test.find().getIndex()
+// db.test.find().dropIndex({Name:"Ayushi"})
