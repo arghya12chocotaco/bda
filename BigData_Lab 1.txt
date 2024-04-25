@@ -1,0 +1,63 @@
+//To create a database
+use Ayushi //--> This will create a database by name Ayushi and will switch to that db.
+
+//To create a collection
+db.createCollection("test")
+
+//To show all the databases
+show dbs
+
+//To show all the collections
+show collections
+
+//To insert a record in a collection
+db.test.insertOne({Name:"Ayushi",Age:"16",Gender:"Female"})
+
+//To insert multiple records in a collection
+db.test.insertMany([{Name:"Ayush",Age:"19",Gender:"Male"},{Name:"Abhishek",Age:"22",Gender:"Male"}])
+
+//To update a record in the collection
+db.test.updateOne({Name:"Ayushi"} ,{$set:{Age:21}})
+
+//To update multiple records in the collection
+db.test.updateMany({Gender:"Male"} ,{$set:{Age:21}})
+
+//To query or to display the data of a collection
+db.test.find()
+
+//To query or to display the data of a collection in formatted way
+db.test.find().pretty()
+
+//To display a single record from collection with given specification
+db.test.findOne({Name:"Ayushi"})
+
+//Using AND condition to display records from collection with given specification
+db.test.find({$and :[{Age: "16"},{Gender:"Female"}]})
+
+//Using OR condition to display records from collection with given specification
+db.test.find({$or :[{Age: "19"},{Gender:"Female"}]})
+
+//Using AND & OR condition togetherly to display records from collection with given specification
+db.test.find({$or :[{Age: "19"},{$and:[{Age:"16"},{Gender:"Female"}]}]})
+
+//Using NOR condition to display records from collection with given specification
+db.test.find({$nor :[{Age: "19"},{Gender:"Female"}]})
+
+//Using NOT condition to display records from collection with given specification
+db.test.find({Age:{$not :{$gt: "19"}}})
+
+//Using LIMIT keyword for displaying few records from the collections
+db.test.find().limit(2)
+
+//Using SKIP keyword for displaying few records by skipping some records from the collections
+db.test.find().skip(2)
+db.test.find().limit(2).skip(1)
+
+//Using SORT keyword for displaying records from the collections in sorted manner
+db.test.find().sort()
+
+//Using GETINDEXES keyword for displaying records from the collections
+db.test.find().getIndexes()
+
+//Using DROPINDEX keyword for displaying records from the collections
+db.test.find().dropIndex({Name:"Ayushi"})
