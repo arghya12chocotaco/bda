@@ -1,2 +1,7 @@
 db.students.aggregate([{$group: {_id:"$sec", total_st: {$sum:1}, max_age:{$max:"$age"} } }])
 db.students.aggregate([{$match:{sec:"B"}},{$count:"Total student in sec:B"}])
+
+
+db.student.aggregate([{$group:{_id:"$Gender",total:{$sum:1}}}])
+db.student.aggregate([{$match:{Gender:"female"}},{$count:"no of female"}])
+db.student.aggregate([{$group:{_id:"$Gender"}}])
